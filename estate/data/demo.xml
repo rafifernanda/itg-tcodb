@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="estate_property_one" model="estate.property">
+        <field name="name">Redhat Villa</field>
+        <field name="description">A villa for Redhat Team</field>
+        <field name="postcode">987454</field>
+        <field name="date_availability">2024-05-31</field>
+        <field name="expected_price">3600000</field>
+        <field name="bedrooms">7</field>
+        <field name="living_area">50</field>
+        <field name="facades">5</field>
+        <field name="garage">True</field>
+        <field name="garden">True</field>
+        <field name="garden_area">800000</field>
+        <field name="garden_orientation">S</field>
+    </record>
+</odoo>
