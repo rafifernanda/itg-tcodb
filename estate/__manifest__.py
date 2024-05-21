@@ -4,5 +4,5 @@
     "license": "OPL-1",
     "application": True,
     "depends": ["base"],
-    "data": ["data/demo.xml", "security/res_groups.xml"]
+    "data": ["data/demo.xml", "security/res_groups.xml", "security/ir.access.model.csv"]
 }
