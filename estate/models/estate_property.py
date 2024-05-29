@@ -12,7 +12,7 @@ class EstateProperty(models.Model):
 
     def _default_date_availability(self):
         return fields.Date.context_today(self) + relativedelta(months=3)
-
+    
     # --------------------------------------- Fields Declaration ----------------------------------
 
     # Basic
