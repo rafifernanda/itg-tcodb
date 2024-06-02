@@ -1,4 +1,5 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 class EstatePropertyOffer(models.Model):
