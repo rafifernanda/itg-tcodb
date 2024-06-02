@@ -1,5 +1,6 @@
 from odoo import fields, models, api, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare, float_is_zero
 from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
@@ -8,6 +9,10 @@ class EstateProperty(models.Model):
 
     _name = "estate.property"
     _description = "Real Estate Property"
+    _sql_constraints = [
+        ("check_expected_price", "CHECK(expected_price > 0)", "The expected price must be strictly positive"),
+        ("check_selling_price", "CHECK(selling_price >= 0)", "The offer price must be positive"),
+    ]
 
     # ---------------------------------------- Default Methods ------------------------------------
 
@@ -82,6 +87,19 @@ class EstateProperty(models.Model):
         for prop in self:
             prop.best_price = max(prop.offer_ids.mapped("price")) if prop.offer_ids else 0.0
 
+
+    # ----------------------------------- Constrains and Onchanges --------------------------------
+
+    @api.constrains("expected_price", "selling_price")
+    def _check_price_difference(self):
+        for prop in self:
+            if (
+                not float_is_zero(prop.selling_price, precision_rounding=0.01)
+                and float_compare(prop.selling_price, prop.expected_price * 90.0 / 100.0, precision_rounding=0.01) < 0
+            ):
+                raise ValidationError(
+                    _("The selling price must be at least 90 percent of the expected price! You must reduce the expected price if you want to accept this offer."))
+
     @api.onchange("garden")
     def _onchange_garden(self):
         if self.garden:
@@ -109,5 +127,6 @@ class EstateProperty(models.Model):
             raise UserError(_("Sold properties cannot be canceled."))
         return self.write({"state": "canceled"})
 
+    
 
 
