@@ -51,9 +51,15 @@ class EstateProperty(models.Model):
         copy=False,
         default="new",
     )
+    # cara bacanya
+    # satu estate property hanya punya satu property type
+    # satu property type punya banyak state property
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
+    # cara bacanya
+    # satu estate property punya banyak offer
+    # satu offer hanya punya satu estate property
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
 
