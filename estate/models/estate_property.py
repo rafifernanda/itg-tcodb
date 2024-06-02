@@ -68,11 +68,8 @@ class EstateProperty(models.Model):
         compute="_compute_total_area",
         help="Total area computed by summing the living area and the garden area",
     )
-    best_price = fields.Integer(
-        "Best Price",
-        compute="_compute_best_price",
-        help="Best price computed by selecting the best offer",
-    )
+    best_price = fields.Float("Best Offer", compute="_compute_best_price", help="Best offer received")
+
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
