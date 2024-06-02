@@ -61,5 +61,7 @@ class EstateProperty(models.Model):
     # satu estate property punya banyak offer
     # satu offer hanya punya satu estate property
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
+    tag_ids = fields.Many2many("estate.property.tag", string="Tags")
+
 
 
