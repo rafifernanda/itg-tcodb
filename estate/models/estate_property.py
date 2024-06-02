@@ -1,4 +1,5 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
@@ -94,6 +95,19 @@ class EstateProperty(models.Model):
     def _onchange_date_availability(self):
         if self.date_availability < fields.Date.today():
             return {"warning": {"title": ("Warning"), "message": ("date_availability is set to a date prior than today")}}
+        
+
+    # ---------------------------------------- Action Methods -------------------------------------
+
+    def action_sold(self):
+        if "canceled" in self.mapped("state"):
+            raise UserError(_("Canceled properties cannot be sold."))
+        return self.write({"state": "sold"})
+
+    def action_cancel(self):
+        if "sold" in self.mapped("state"):
+            raise UserError(_("Sold properties cannot be canceled."))
+        return self.write({"state": "canceled"})
 
 
 
