@@ -21,10 +21,18 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <tree string="Property Offers">
-                <field name="price" />
+                <field name="property_id" />
                 <field name="partner_id" />
+                <field name="price" />
                 <field name="state" />
+                <field name="property_type_id" />
             </tree>
         </field>
+    </record>
+
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree</field>
     </record>
 </odoo>
