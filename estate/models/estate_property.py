@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
 
     _name = "estate.property"
     _description = "Real Estate Property"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = "id desc"
     _sql_constraints = [
         ("check_expected_price", "CHECK(expected_price > 0)", "The expected price must be strictly positive"),
