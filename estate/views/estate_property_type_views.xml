@@ -11,6 +11,7 @@
                             <field name="name" />
                         </h1>
                     </div>
+                    <field name="sequence" readonly="1" widget="handle" />
                     <notebook>
                         <page string="Properties">
                             <field name="property_ids" readonly="1">
