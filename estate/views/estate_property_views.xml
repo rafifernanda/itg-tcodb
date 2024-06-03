@@ -100,7 +100,7 @@
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
-                <field name="living_area" />
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]" />
                 <field name="facades" />
                 <filter string="Available" name="available" domain="[('state', 'in', ('new', 'offer_received'))]" />
                 <group expand="1" string="Group By apa hayo">
@@ -113,6 +113,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="context">{'search_default_available': 1}</field>
     </record>
 </odoo>
