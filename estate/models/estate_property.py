@@ -116,6 +116,15 @@ class EstateProperty(models.Model):
             return {"warning": {"title": ("Warning"), "message": ("date_availability is set to a date prior than today")}}
         
 
+    # ------------------------------------------ CRUD Methods -------------------------------------
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_canceled(self):
+        for rec in self:
+            if rec.state not in ["new", "canceled"]:
+                raise UserError(_("Only new and canceled properties can be deleted."))
+        
+
     # ---------------------------------------- Action Methods -------------------------------------
 
     def action_sold(self):

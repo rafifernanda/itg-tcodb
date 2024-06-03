@@ -1,6 +1,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
+from odoo.tools import float_compare
 
 class EstatePropertyOffer(models.Model):
 
@@ -49,6 +50,20 @@ class EstatePropertyOffer(models.Model):
         for offer in self:
             date = offer.create_date.date() if offer.create_date else fields.Date.today()
             offer.validity = (offer.date_deadline - date).days
+
+    # ------------------------------------------ CRUD Methods -------------------------------------
+
+    @api.model
+    def create(self, vals):
+        if vals.get("property_id") and vals.get("price"):
+            prop = self.env["estate.property"].browse(vals["property_id"])
+            # We check if the offer is higher than the existing offers
+            if prop.offer_ids:
+                max_offer = max(prop.mapped("offer_ids.price"))
+                if float_compare(vals["price"], max_offer, precision_rounding=0.01) <= 0:
+                    raise UserError(_("The offer must be higher than %.2f" % max_offer))
+            prop.state = "offer_received"
+        return super().create(vals)
 
 
     # ---------------------------------------- Action Methods -------------------------------------
