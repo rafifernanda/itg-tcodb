@@ -40,6 +40,6 @@ class EstatePropertyType(models.Model):
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "res_model": "estate.property.offer",
-            "domain": [("id", "in", self.offer_ids.ids)],
+            "domain": [("property_type_id", "=", self.id)],
         }
 
