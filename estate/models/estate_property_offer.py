@@ -33,7 +33,6 @@ class EstatePropertyOffer(models.Model):
     property_type_id = fields.Many2one(
         "estate.property.type", related="property_id.property_type_id", string="Property Type", store=True
     )
-    active_id = fields.Many2one("estate.property", string="Active", related="property_id", store=True)
     
     # Computed
     date_deadline = fields.Date(string="Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline")
