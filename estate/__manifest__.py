@@ -5,7 +5,8 @@
     "license": "OEEL-1",
     "depends": ["crm"],
     "data": [
-        "security/res_groups.xml"
+        "security/res_groups.xml",
+        "security/ir.model.access.csv"
     ],
     "demo": [
         "demo/demo.xml"
