@@ -1,5 +1,8 @@
 <odoo>
-    <record id="estate_manager" model="res.groups">
+    <record id="group_estate_user" model="res.group">
+        <field name="name">Estate User</field>
+    </record>
+    <record id="group_estate_manager" model="res.groups">
         <field name="name">Estate Manager</field>
     </record>
 </odoo>
