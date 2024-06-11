@@ -6,6 +6,7 @@
     "depends":["crm"],
     "data":[
         "security/ir.model.access.csv",
+        "security/res_groups.xml"
         "views/estate_property_views.xml",
         "views/estate_menus.xml",
     ],
