@@ -1,34 +1,45 @@
-from odoo import models, fields
 from dateutil.relativedelta import relativedelta
 
+from odoo import fields, models
+
+
 class EstateProperty(models.Model):
+
+    # ---------------------------------------- Private Attributes ---------------------------------
+
     _name = "estate.property"
     _description = "Real Estate Property"
 
-    def _default_avail(self):
+    # ---------------------------------------- Default Methods ------------------------------------
+
+    def _default_date_availability(self):
         return fields.Date.context_today(self) + relativedelta(months=3)
 
+    # --------------------------------------- Fields Declaration ----------------------------------
+
+    # Basic
     name = fields.Char("Title", required=True)
     description = fields.Text("Description")
-    postcode = fields.Char("Post Code")
-    date_availability = fields.Date("Date Availablility", copy=False, default=lambda self: self._default_avail())
+    postcode = fields.Char("Postcode")
+    date_availability = fields.Date("Available From", default=lambda self: self._default_date_availability(), copy=False)
     expected_price = fields.Float("Expected Price", required=True)
-    selling_price = fields.Float("Selling Price", readonly=True, copy=False)
+    selling_price = fields.Float("Selling Price", copy=False, readonly=True)
     bedrooms = fields.Integer("Bedrooms", default=2)
-    living_area = fields.Integer("Living Area")
+    living_area = fields.Integer("Living Area (sqm)")
     facades = fields.Integer("Facades")
     garage = fields.Boolean("Garage")
     garden = fields.Boolean("Garden")
-    garden_area = fields.Integer("Garden Area")
+    garden_area = fields.Integer("Garden Area (sqm)")
     garden_orientation = fields.Selection(
         selection=[
             ("N", "North"),
             ("S", "South"),
             ("E", "East"),
             ("W", "West"),
-            ],
-            string="Garden Orientation")
-    active = fields.Boolean()
+        ],
+        string="Garden Orientation",
+    )
+    active = fields.Boolean("Active", default=True)
     state = fields.Selection(
         selection=[
             ("new", "New"),
@@ -37,7 +48,8 @@ class EstateProperty(models.Model):
             ("sold", "Sold"),
             ("canceled", "Canceled"),
         ],
+        string="Status",
         required=True,
         copy=False,
-        default="new"
+        default="new",
     )
