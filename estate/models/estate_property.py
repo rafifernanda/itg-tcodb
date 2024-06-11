@@ -1,45 +1,34 @@
+from odoo import models, fields
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
-
-
 class EstateProperty(models.Model):
-
-    # ---------------------------------------- Private Attributes ---------------------------------
-
     _name = "estate.property"
     _description = "Real Estate Property"
 
-    # ---------------------------------------- Default Methods ------------------------------------
-
-    def _default_date_availability(self):
+    def _default_avail(self):
         return fields.Date.context_today(self) + relativedelta(months=3)
 
-    # --------------------------------------- Fields Declaration ----------------------------------
-
-    # Basic
     name = fields.Char("Title", required=True)
     description = fields.Text("Description")
-    postcode = fields.Char("Postcode")
-    date_availability = fields.Date("Available From", default=lambda self: self._default_date_availability(), copy=False)
+    postcode = fields.Char("Post Code")
+    date_availability = fields.Date("Date Availablility", copy=False, default=lambda self: self._default_avail())
     expected_price = fields.Float("Expected Price", required=True)
-    selling_price = fields.Float("Selling Price", copy=False, readonly=True)
+    selling_price = fields.Float("Selling Price", readonly=True, copy=False)
     bedrooms = fields.Integer("Bedrooms", default=2)
-    living_area = fields.Integer("Living Area (sqm)")
+    living_area = fields.Integer("Living Area")
     facades = fields.Integer("Facades")
-    garage = fields.Boolean("Garage")
+    garages = fields.Boolean("Garages")
     garden = fields.Boolean("Garden")
-    garden_area = fields.Integer("Garden Area (sqm)")
+    garden_area = fields.Integer("Garden Area")
     garden_orientation = fields.Selection(
         selection=[
             ("N", "North"),
             ("S", "South"),
             ("E", "East"),
             ("W", "West"),
-        ],
-        string="Garden Orientation",
-    )
-    active = fields.Boolean("Active", default=True)
+            ],
+            string="Garden Orientation")
+    active = fields.Boolean()
     state = fields.Selection(
         selection=[
             ("new", "New"),
@@ -48,35 +37,7 @@ class EstateProperty(models.Model):
             ("sold", "Sold"),
             ("canceled", "Canceled"),
         ],
-        string="Status",
         required=True,
         copy=False,
-        default="new",
+        default="new"
     )
-
-    # Relational
-    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
-    user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
-    buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
-    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
-    tag_ids = fields.Many2many("estate.property.tag", string="Tags")
-
-    # Computed
-    total_area = fields.Integer(
-        "Total Area (sqm)",
-        compute="_compute_total_area",
-        help="Total area computed by summing the living area and the garden area",
-    )
-    best_price = fields.Float("Best Offer", compute="_compute_best_price", help="Best offer received")
-
-    # ---------------------------------------- Compute methods ------------------------------------
-
-    @api.depends("living_area", "garden_area")
-    def _compute_total_area(self):
-        for prop in self:
-            prop.total_area = prop.living_area + prop.garden_area
-
-    @api.depends("offer_ids.price")
-    def _compute_best_price(self):
-        for prop in self:
-            prop.best_price = max(prop.offer_ids.mapped("price")) if prop.offer_ids else 0.0
