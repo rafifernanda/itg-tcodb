@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Details</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Details">
+                <field name="name" />
+                <field name="postcode" />
+                <field name="bedrooms" />
+                <field name="living_area" />
+                <field name="expected_price" />
+                <field name="selling_price" />
+                <field name="date_availability" />
+            </tree>
+        </field>
+    </record>
     <record id="estate_property_view_form" model="ir.ui.view">
         <field name="name">estate.property.form</field>
         <field name="model">estate.property</field>
@@ -39,24 +59,21 @@
             </form>
         </field>
     </record>
-    <record id="estate_property_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.tree</field>
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Details">
+            <search>
                 <field name="name" />
+                <field name="state" />
                 <field name="postcode" />
+                <field name="expected_price" />
                 <field name="bedrooms" />
                 <field name="living_area" />
-                <field name="expected_price" />
-                <field name="selling_price" />
-                <field name="date_availability" />
-            </tree>
+                <field name="facades" />
+                <filter name="filter_state_new" string="New" domain="[('state', 'in', ('new', 'offer_received'))]" />
+                <filter name="group_by_postcode" string="Postcode" context="{'group_by': 'postcode'}" />
+            </search>
         </field>
-    </record>
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Details</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field>
     </record>
 </odoo>
