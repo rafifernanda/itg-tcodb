@@ -6,10 +6,10 @@
     "depends": ["crm"],
     "data": [
         # SECURITY
-        "security/ir.model.access.csv"
+        "security/ir.model.access.csv",
         # VIEWS
-        'views/estate_property_views.xml',
-        'views/estate_menus.xml'
+        "views/estate_menus.xml",
+        "views/estate_property_views.xml",
         # MENUS
     ]
 }
