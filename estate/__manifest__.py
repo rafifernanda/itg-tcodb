@@ -5,13 +5,5 @@
     "license": "OEEL-1",
     "depends": ["crm"],
     "data": [
-        # SECURITY
-        "security/ir.model.access.csv",
-        # VIEWS
-        "views/estate_menus.xml",
-        "views/estate_property_views.xml",
-        # MENUS
-    ],
-    "installable":True,
-    "application":True,
+    ]
 }
