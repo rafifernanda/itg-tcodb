@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
     bedrooms = fields.Integer("Bedrooms", default=2)
     living_area = fields.Integer("Living Area")
     facades = fields.Integer("Facades")
-    garages = fields.Boolean("Garages")
+    garage = fields.Boolean("Garage")
     garden = fields.Boolean("Garden")
     garden_area = fields.Integer("Garden Area")
     garden_orientation = fields.Selection(
