@@ -22,7 +22,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Description">
+                        <page  string="Description">
                             <group>
                                 <group>
                                     <field name="description" />
@@ -39,26 +39,24 @@
             </form>
         </field>
     </record>
-
     <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Properties">
+            <tree string="Details">
                 <field name="name" />
                 <field name="postcode" />
                 <field name="bedrooms" />
                 <field name="living_area" />
                 <field name="expected_price" />
                 <field name="selling_price" />
-                <field name="date_availability" optional="hide" />
+                <field name="date_availability" />
             </tree>
         </field>
     </record>
-
     <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
+        <field name="name">Details</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form,search</field>
+        <field name="view_mode">tree,form</field>
     </record>
 </odoo>
