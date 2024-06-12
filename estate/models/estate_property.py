@@ -60,6 +60,24 @@ class EstateProperty(models.Model):
         for rec in self:
             rec.best_price = max(rec.offer_ids.mapped("price")) if rec.offer_ids else 0.0
 
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for rec in self:
+            if not rec.garden:
+                rec.garden_area = 0
+
+    @api.onchange("date_availability")
+    def _onchange_date_availability(self) :
+        for rec in self:
+            if rec.date_availability < fields.Date.today():
+                return {
+                    "warning": {
+                        "title": ("Warning"),
+                        "message": ("Date Availability is set to a date prior by today")
+                    }
+                }
+
+
     
 
 
