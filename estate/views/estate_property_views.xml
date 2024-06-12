@@ -57,6 +57,7 @@
                                     <field name="garden" />
                                     <field name="garden_area" />
                                     <field name="total_area" />
+                                    <field name="best_price" />
                                 </group>
                             </group>
                         </page>
