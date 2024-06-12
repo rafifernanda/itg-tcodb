@@ -14,4 +14,16 @@
         <field name="garden_area">800000</field>
         <field name="garden_orientation">S</field>
     </record>
+    <record id="estate_property_type_one" model="estate.property.type">
+        <field name="name">Apartment</field>
+    </record>
+    <record id="estate_property_type_two" model="estate.property.type">
+        <field name="name">House</field>
+    </record>
+    <record id="estate_property_tag_one" model="estate.property.tag">
+        <field name="name">garden</field>
+    </record>
+    <record id="estate_property_tag_two" model="estate.property.tag">
+        <field name="name">cellar</field>
+    </record>
 </odoo>
