@@ -27,11 +27,13 @@
         <field name="price">150000</field>
         <field name="status">accepted</field>
         <field name="property_id">20240602</field>
+        <field name="partner_id">39420354</field>
     </record>
     <record id="estate_property_offer_two" model="estate.property.offer">
         <field name="price">175000</field>
         <field name="status">accepted</field>
         <field name="property_id">20240603</field>
+        <field name="partner_id">39420344</field>
     </record>
 
     <record id="estate_property_tag_one" model="estate.property.tag">
