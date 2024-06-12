@@ -13,7 +13,7 @@
         <field name="garden">True</field>
         <field name="garden_area">800000</field>
         <field name="garden_orientation">S</field>
-        <field name="offer_ids">HM20240602</field>
+        <field name="offer_ids">20240602</field>
     </record>
 
     <record id="estate_property_type_one" model="estate.property.type">
