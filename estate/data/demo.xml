@@ -13,13 +13,27 @@
         <field name="garden">True</field>
         <field name="garden_area">800000</field>
         <field name="garden_orientation">S</field>
+        <field name="offer_ids">HM20240602</field>
     </record>
+
     <record id="estate_property_type_one" model="estate.property.type">
         <field name="name">Apartment</field>
     </record>
     <record id="estate_property_type_two" model="estate.property.type">
         <field name="name">House</field>
     </record>
+
+    <record id="estate_property_offer_one" model="estate.property.offer">
+        <field name="price">150000</field>
+        <field name="status">accepted</field>
+        <field name="property_id">HM20240602</field>
+    </record>
+    <record id="estate_property_offer_two" model="estate.property.offer">
+        <field name="price">175000</field>
+        <field name="status">accepted</field>
+        <field name="property_id">HM20240603</field>
+    </record>
+
     <record id="estate_property_tag_one" model="estate.property.tag">
         <field name="name">garden</field>
     </record>
