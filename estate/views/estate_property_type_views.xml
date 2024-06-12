@@ -13,13 +13,13 @@
                     </div>
                     <notebook>
                         <page string="Properties">
-                            <field name="property_ids">
+                            <!-- <field name="property_ids">
                                 <tree>
                                     <field name="name" />
                                     <field name="expected_price" />
                                     <field name="state" />
                                 </tree>
-                            </field>
+                            </field> -->
                         </page>
                     </notebook>
                 </sheet>
